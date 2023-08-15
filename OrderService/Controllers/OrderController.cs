@@ -23,19 +23,18 @@ namespace OrderService.Controllers
         {
             try
             {
+                var product = new Product { ProductId = orderDto.ProductId, ProductName = orderDto.ProductName };
+                var client = new Client { ClientAddress = orderDto.ClientAddress, ClientId = orderDto.ClientId, ClientName = orderDto.ClientName };
                 var order = new Order
                 {
                     IsProcesing = false,
-                    ProductName = orderDto.ProductName,
                     Quantity = orderDto.Quantity,
-                    ClientAddress= orderDto.ClientAddress,
-                    ClientId= orderDto.ClientId,
-                    ClientName= orderDto.ClientName,
                     OrderDate = DateTime.Now,
                     OrderStatus = "Envoyé",
                     Price= orderDto.Price,
-                    ProductId= orderDto.ProductId,
-                    TotalPrice = orderDto.Price * orderDto.Quantity
+                    TotalPrice = orderDto.Price * orderDto.Quantity,
+                    OrderProduct = product,
+                    OrderClient = client
                 };
 
                 await  _collection.InsertOneAsync(order);

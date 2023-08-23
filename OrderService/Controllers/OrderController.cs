@@ -27,12 +27,12 @@ namespace OrderService.Controllers
                 var client = new Client { ClientAddress = orderDto.ClientAddress, ClientId = orderDto.ClientId, ClientName = orderDto.ClientName };
                 var order = new Order
                 {
-                    IsProcesing = false,
+                    IsProcesing = "false",
                     Quantity = orderDto.Quantity,
-                    OrderDate = DateTime.Now,
+                    OrderDate = DateTime.Now.ToString(),
                     OrderStatus = "Envoyé",
                     Price= orderDto.Price,
-                    TotalPrice = orderDto.Price * orderDto.Quantity,
+                    TotalPrice = (int.Parse(orderDto.Price ?? "0") * int.Parse(orderDto.Quantity ?? "0")).ToString(),
                     OrderProduct = product,
                     OrderClient = client
                 };
